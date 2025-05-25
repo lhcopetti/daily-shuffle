@@ -6,7 +6,7 @@ import com.copetti.dailyshuffle.scoundrel.CardSuit
 
 enum class ScoundrelType {
     POTION,
-    ENEMY,
+    MONSTER,
     EQUIPMENT
 }
 
@@ -21,8 +21,8 @@ class ScoundrelCardMapper {
         fun toScoundrelCard(card: Card): ScoundrelCard {
 
             val type = when (card.suit) {
-                CardSuit.CLUBS -> ScoundrelType.ENEMY
-                CardSuit.SPADES -> ScoundrelType.ENEMY
+                CardSuit.CLUBS -> ScoundrelType.MONSTER
+                CardSuit.SPADES -> ScoundrelType.MONSTER
                 CardSuit.HEARTS -> ScoundrelType.POTION
                 CardSuit.DIAMONDS -> ScoundrelType.EQUIPMENT
             }

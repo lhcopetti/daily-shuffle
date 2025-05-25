@@ -8,7 +8,7 @@ fun main() {
     println("******* Scoundrel game *******")
     println("******************************")
 
-    val seed = 37L
+    val seed = 33L
     val random = Random(seed)
     val initialDeck = CardDeck.newShuffledDeck(random)
     val game = ScoundrelGame.newGame(random, initialDeck)
@@ -45,6 +45,6 @@ private fun printGame(game: ScoundrelGame) {
     println("Scoundrel Game - Current State")
     println("Your current life is: ${game.life()}")
     println("Cards remaining in dungeon: ${game.dungeonSize()}")
-    print("The room is: [${game.room().cards.joinToString(separator = " - ") { it?.toShortFormat() ?: "empty" }}]")
+    print("The room is: [${game.room().sectors.joinToString(separator = " - ") { it.card?.toShortFormat() ?: "empty" }}]")
     println()
 }

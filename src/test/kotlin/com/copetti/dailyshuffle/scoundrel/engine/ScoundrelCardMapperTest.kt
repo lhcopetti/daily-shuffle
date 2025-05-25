@@ -9,7 +9,7 @@ class ScoundrelCardMapperTest {
     fun `maps CLUBS to ENEMY and correct value`() {
         val card = Card(CardRank.FIVE, CardSuit.CLUBS)
         val scoundrelCard = ScoundrelCardMapper.toScoundrelCard(card)
-        assertEquals(ScoundrelType.ENEMY, scoundrelCard.type)
+        assertEquals(ScoundrelType.MONSTER, scoundrelCard.type)
         assertEquals(5, scoundrelCard.value)
     }
 
@@ -17,7 +17,7 @@ class ScoundrelCardMapperTest {
     fun `maps SPADES to ENEMY and correct value`() {
         val card = Card(CardRank.KING, CardSuit.SPADES)
         val scoundrelCard = ScoundrelCardMapper.toScoundrelCard(card)
-        assertEquals(ScoundrelType.ENEMY, scoundrelCard.type)
+        assertEquals(ScoundrelType.MONSTER, scoundrelCard.type)
         assertEquals(13, scoundrelCard.value)
     }
 
