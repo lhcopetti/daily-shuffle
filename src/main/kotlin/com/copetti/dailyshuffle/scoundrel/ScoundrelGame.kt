@@ -1,8 +1,7 @@
-package com.copetti.dailyshuffle.scoundrel.com.copetti.dailyshuffle.scoundrel
+package com.copetti.dailyshuffle.scoundrel
 
-import com.copetti.dailyshuffle.scoundrel.*
+import com.copetti.dailyshuffle.scoundrel.state.ScoundrelGameState
 import com.copetti.dailyshuffle.scoundrel.command.ScoundrelCommand
-import com.copetti.dailyshuffle.scoundrel.com.copetti.dailyshuffle.scoundrel.state.ScoundrelGameState
 import com.copetti.dailyshuffle.scoundrel.engine.ScoundrelGameEngine
 import kotlin.random.Random
 
@@ -22,8 +21,7 @@ class ScoundrelGame private constructor(
     }
 
     fun executeCommand(command: ScoundrelCommand): ScoundrelGame {
-        val newState = command.execute(state)
-        return ScoundrelGame(newState, engine)
+        return ScoundrelGame(engine.executeCommand(state, command), engine)
     }
 
     companion object {

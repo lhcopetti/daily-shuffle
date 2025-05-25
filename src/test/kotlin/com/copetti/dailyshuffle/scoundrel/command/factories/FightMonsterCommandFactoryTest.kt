@@ -4,7 +4,7 @@ import com.copetti.dailyshuffle.scoundrel.Card
 import com.copetti.dailyshuffle.scoundrel.CardDeck
 import com.copetti.dailyshuffle.scoundrel.CardRank
 import com.copetti.dailyshuffle.scoundrel.CardSuit
-import com.copetti.dailyshuffle.scoundrel.com.copetti.dailyshuffle.scoundrel.state.ScoundrelGameState
+import com.copetti.dailyshuffle.scoundrel.state.ScoundrelGameState
 import com.copetti.dailyshuffle.scoundrel.command.commands.FightMonsterCommand
 import com.copetti.dailyshuffle.scoundrel.state.ScoundrelRoom
 import org.junit.jupiter.api.Assertions.assertEquals

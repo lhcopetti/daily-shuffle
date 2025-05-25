@@ -1,6 +1,5 @@
 package com.copetti.dailyshuffle.scoundrel
 
-import com.copetti.dailyshuffle.scoundrel.com.copetti.dailyshuffle.scoundrel.ScoundrelGame
 import kotlin.random.Random
 
 fun main() {

@@ -1,11 +1,9 @@
-package com.copetti.dailyshuffle.scoundrel.com.copetti.dailyshuffle.scoundrel.state
+package com.copetti.dailyshuffle.scoundrel.state
 
-import com.copetti.dailyshuffle.scoundrel.Card
 import com.copetti.dailyshuffle.scoundrel.ScoundrelException
 import com.copetti.dailyshuffle.scoundrel.ScoundrelGameView
 import com.copetti.dailyshuffle.scoundrel.CardDeck
-import com.copetti.dailyshuffle.scoundrel.com.copetti.dailyshuffle.scoundrel.ScoundrelDeckFilteringStrategy
-import com.copetti.dailyshuffle.scoundrel.state.ScoundrelRoom
+import com.copetti.dailyshuffle.scoundrel.ScoundrelDeckFilteringStrategy
 import kotlin.random.Random
 
 data class ScoundrelGameState(

@@ -1,6 +1,6 @@
 package com.copetti.dailyshuffle.scoundrel.command.commands
 
-import com.copetti.dailyshuffle.scoundrel.com.copetti.dailyshuffle.scoundrel.state.ScoundrelGameState
+import com.copetti.dailyshuffle.scoundrel.state.ScoundrelGameState
 import com.copetti.dailyshuffle.scoundrel.command.ScoundrelCommand
 import com.copetti.dailyshuffle.scoundrel.state.ScoundrelRoom
 
