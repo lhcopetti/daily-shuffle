@@ -1,11 +1,15 @@
 package com.copetti.dailyshuffle.scoundrel.command.factories
 
-import com.copetti.dailyshuffle.scoundrel.*
+import com.copetti.dailyshuffle.scoundrel.Card
+import com.copetti.dailyshuffle.scoundrel.CardDeck
+import com.copetti.dailyshuffle.scoundrel.CardRank
+import com.copetti.dailyshuffle.scoundrel.CardSuit
 import com.copetti.dailyshuffle.scoundrel.com.copetti.dailyshuffle.scoundrel.state.ScoundrelGameState
-import com.copetti.dailyshuffle.scoundrel.command.commands.DrinkPotionCommand
 import com.copetti.dailyshuffle.scoundrel.command.commands.DiscardHealthPotionCommand
+import com.copetti.dailyshuffle.scoundrel.command.commands.DrinkPotionCommand
 import com.copetti.dailyshuffle.scoundrel.state.ScoundrelRoom
-import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 import kotlin.random.Random
 
@@ -14,12 +18,11 @@ class DrinkPotionCommandFactoryTest {
 
     @Test
     fun `creates command for each potion card in the room`() {
-        val room = ScoundrelRoom(
+        val room = ScoundrelRoom.buildScoundrelRoom(
             listOf(
                 Card(CardRank.ACE, CardSuit.HEARTS), // potion
                 Card(CardRank.FIVE, CardSuit.CLUBS), // not potion
-                Card(CardRank.TEN, CardSuit.HEARTS), // potion
-                null
+                Card(CardRank.TEN, CardSuit.HEARTS) // potion
             )
         )
         val state = ScoundrelGameState(
@@ -38,11 +41,10 @@ class DrinkPotionCommandFactoryTest {
 
     @Test
     fun `does not create command for non-potion cards`() {
-        val room = ScoundrelRoom(
+        val room = ScoundrelRoom.buildScoundrelRoom(
             listOf(
                 Card(CardRank.FIVE, CardSuit.CLUBS),
-                Card(CardRank.TEN, CardSuit.DIAMONDS),
-                null
+                Card(CardRank.TEN, CardSuit.DIAMONDS)
             )
         )
         val state = ScoundrelGameState(
@@ -57,7 +59,7 @@ class DrinkPotionCommandFactoryTest {
 
     @Test
     fun `creates discard command for each potion card if a potion has already been drunk in this room`() {
-        val room = ScoundrelRoom(
+        val room = ScoundrelRoom.buildScoundrelRoom(
             listOf(
                 Card(CardRank.ACE, CardSuit.HEARTS),
                 Card(CardRank.TEN, CardSuit.HEARTS)
@@ -76,4 +78,4 @@ class DrinkPotionCommandFactoryTest {
         assertTrue(discardCommands.any { it.displayName().contains("#0") })
         assertTrue(discardCommands.any { it.displayName().contains("#1") })
     }
-} 
+}

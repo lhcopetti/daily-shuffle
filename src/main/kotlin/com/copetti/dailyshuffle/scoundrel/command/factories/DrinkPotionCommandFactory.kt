@@ -5,22 +5,17 @@ import com.copetti.dailyshuffle.scoundrel.command.ScoundrelCommand
 import com.copetti.dailyshuffle.scoundrel.command.ScoundrelCommandFactory
 import com.copetti.dailyshuffle.scoundrel.command.commands.DiscardHealthPotionCommand
 import com.copetti.dailyshuffle.scoundrel.command.commands.DrinkPotionCommand
-import com.copetti.dailyshuffle.scoundrel.engine.ScoundrelCardMapper
 import com.copetti.dailyshuffle.scoundrel.engine.ScoundrelType
 
 class DrinkPotionCommandFactory : ScoundrelCommandFactory {
     override fun createCommands(state: ScoundrelGameState): List<ScoundrelCommand> {
-        val commands = mutableListOf<ScoundrelCommand>()
-        state.room.cards.forEachIndexed { index, card ->
-            val scoundrelCard = card?.let { ScoundrelCardMapper.toScoundrelCard(it) }
-            if (scoundrelCard != null && scoundrelCard.type == ScoundrelType.POTION) {
-                if (state.drankPotionInRoom) {
-                    commands.add(DiscardHealthPotionCommand(target = index))
-                } else {
-                    commands.add(DrinkPotionCommand(lifeBonus = scoundrelCard.value, target = index))
-                }
+        return state.room.sectors
+            .filter { sector -> sector.toScoundrelCard()?.type == ScoundrelType.POTION }
+            .map { sector ->
+                if (state.drankPotionInRoom)
+                    DiscardHealthPotionCommand(sector.roomIndex)
+                else
+                    DrinkPotionCommand(sector.toScoundrelCard()!!.value, sector.roomIndex)
             }
-        }
-        return commands
     }
 }

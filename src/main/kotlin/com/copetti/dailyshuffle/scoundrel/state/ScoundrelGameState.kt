@@ -29,7 +29,7 @@ data class ScoundrelGameState(
                 throw ScoundrelException("Scoundrel game cannot be started without any playing cards")
 
             val (dungeon, roomCards) = scoundrelDeck.drawAtMost(ROOM_SIZE)
-            val room = ScoundrelRoom(roomCards)
+            val room = ScoundrelRoom.buildScoundrelRoom(roomCards)
             return ScoundrelGameState(dungeon, room, random)
         }
 

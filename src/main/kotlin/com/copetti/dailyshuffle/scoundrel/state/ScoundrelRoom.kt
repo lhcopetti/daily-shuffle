@@ -3,15 +3,23 @@ package com.copetti.dailyshuffle.scoundrel.state
 import com.copetti.dailyshuffle.scoundrel.Card
 
 data class ScoundrelRoom(
-    val cards: List<Card?>
+    val sectors: List<ScoundrelRoomSector>
 ) {
-    fun size() = cards.size
-
+    fun size() = sectors.size
 
     fun clear(index: Int): ScoundrelRoom {
-        val newRoomCards = cards.toMutableList()
-        newRoomCards[index] = null
-        return ScoundrelRoom(newRoomCards)
+        val newSectors = sectors.toMutableList()
+        newSectors[index] = newSectors[index].empty()
+        return ScoundrelRoom(newSectors)
     }
 
+    fun getCards() = sectors.mapNotNull(ScoundrelRoomSector::card)
+
+
+    companion object {
+
+        fun buildScoundrelRoom(cards: List<Card?>) = ScoundrelRoom(
+            sectors = cards.mapIndexed { index, card -> ScoundrelRoomSector(index, card) }
+        )
+    }
 }
