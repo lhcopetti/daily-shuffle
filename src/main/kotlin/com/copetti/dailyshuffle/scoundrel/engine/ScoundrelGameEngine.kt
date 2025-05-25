@@ -1,14 +1,16 @@
 package com.copetti.dailyshuffle.scoundrel.engine
 
-import com.copetti.dailyshuffle.scoundrel.command.ScoundrelCommand
 import com.copetti.dailyshuffle.scoundrel.com.copetti.dailyshuffle.scoundrel.state.ScoundrelGameState
+import com.copetti.dailyshuffle.scoundrel.command.ScoundrelCommand
 import com.copetti.dailyshuffle.scoundrel.command.ScoundrelCommandFactory
+import com.copetti.dailyshuffle.scoundrel.command.factories.DrinkPotionCommandFactory
 import com.copetti.dailyshuffle.scoundrel.command.factories.SkipRoomCommandFactory
 
 class ScoundrelGameEngine(
 ) {
     private val commandFactories: List<ScoundrelCommandFactory> = listOf(
-        SkipRoomCommandFactory()
+        SkipRoomCommandFactory(),
+        DrinkPotionCommandFactory()
     )
 
     fun getAvailableMoves(state: ScoundrelGameState): List<ScoundrelCommand> {

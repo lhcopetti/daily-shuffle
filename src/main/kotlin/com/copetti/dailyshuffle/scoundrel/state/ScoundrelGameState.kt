@@ -13,7 +13,8 @@ data class ScoundrelGameState(
     val room: ScoundrelRoom,
     val random: Random,
     val life: Int = STARTING_LIFE,
-    val skippedLastRoom: Boolean = false
+    val skippedLastRoom: Boolean = false,
+    val drankPotionInRoom: Boolean = false
 ) : ScoundrelGameView {
 
     companion object {
