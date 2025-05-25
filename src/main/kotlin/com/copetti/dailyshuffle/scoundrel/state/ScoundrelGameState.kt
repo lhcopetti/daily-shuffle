@@ -5,11 +5,12 @@ import com.copetti.dailyshuffle.scoundrel.ScoundrelException
 import com.copetti.dailyshuffle.scoundrel.ScoundrelGameView
 import com.copetti.dailyshuffle.scoundrel.CardDeck
 import com.copetti.dailyshuffle.scoundrel.com.copetti.dailyshuffle.scoundrel.ScoundrelDeckFilteringStrategy
+import com.copetti.dailyshuffle.scoundrel.state.ScoundrelRoom
 import kotlin.random.Random
 
 data class ScoundrelGameState(
     val deck: CardDeck,
-    val room: List<Card>,
+    val room: ScoundrelRoom,
     val random: Random,
     val life: Int = STARTING_LIFE,
     val skippedLastRoom: Boolean = false
@@ -26,7 +27,8 @@ data class ScoundrelGameState(
             if (scoundrelDeck.cards.isEmpty())
                 throw ScoundrelException("Scoundrel game cannot be started without any playing cards")
 
-            val (dungeon, room) = scoundrelDeck.drawAtMost(ROOM_SIZE)
+            val (dungeon, roomCards) = scoundrelDeck.drawAtMost(ROOM_SIZE)
+            val room = ScoundrelRoom(roomCards)
             return ScoundrelGameState(dungeon, room, random)
         }
 
@@ -34,7 +36,7 @@ data class ScoundrelGameState(
 
     override fun dungeonSize() = deck.cards.size
 
-    override fun room(): List<Card> {
+    override fun room(): ScoundrelRoom {
         return room
     }
 

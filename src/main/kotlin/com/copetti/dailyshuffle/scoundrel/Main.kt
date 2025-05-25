@@ -45,6 +45,6 @@ private fun printGame(game: ScoundrelGame) {
     println("Scoundrel Game - Current State")
     println("Your current life is: ${game.life()}")
     println("Cards remaining in dungeon: ${game.dungeonSize()}")
-    print("The room is: [${game.room().joinToString(separator = " - ") { it.toShortFormat() }}]")
+    print("The room is: [${game.room().cards.joinToString(separator = " - ") { it?.toShortFormat() ?: "empty" }}]")
     println()
 }
