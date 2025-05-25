@@ -1,6 +1,6 @@
 package com.copetti.dailyshuffle.scoundrel
 
-import java.util.*
+import kotlin.random.Random
 
 class CardDeck(
     val cards: List<Card>
@@ -18,9 +18,10 @@ class CardDeck(
         )
     }
 
+    fun bottomRandomly(cards: List<Card>, random: Random) = CardDeck(this.cards + cards.shuffled(random))
 
     companion object {
-        fun newShuffledDeck(seed: Long): CardDeck {
+        fun newShuffledDeck(random: Random): CardDeck {
 
             val shuffledDeck = mutableListOf<Card>()
 
@@ -30,7 +31,6 @@ class CardDeck(
                 }
             }
 
-            val random = Random(seed)
             return CardDeck(shuffledDeck.shuffled(random))
         }
     }
