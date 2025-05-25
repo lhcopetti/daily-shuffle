@@ -7,6 +7,7 @@ import com.copetti.dailyshuffle.scoundrel.command.commands.internal.ReloadRoomCo
 import com.copetti.dailyshuffle.scoundrel.command.factories.FightMonsterCommandFactory
 import com.copetti.dailyshuffle.scoundrel.command.factories.DrinkPotionCommandFactory
 import com.copetti.dailyshuffle.scoundrel.command.factories.SkipRoomCommandFactory
+import com.copetti.dailyshuffle.scoundrel.state.ScoundrelGameStatus
 
 class ScoundrelGameEngine(
 ) {
@@ -17,10 +18,16 @@ class ScoundrelGameEngine(
     )
 
     fun getAvailableMoves(state: ScoundrelGameState): List<ScoundrelCommand> {
+        if (state.gameStatus() != ScoundrelGameStatus.IN_PROGRESS)
+            throw IllegalStateException("The game has already ended: ${state.gameStatus()}")
+
         return commandFactories.flatMap { f -> f.createCommands(state) }
     }
 
     fun executeCommand(state: ScoundrelGameState, command: ScoundrelCommand): ScoundrelGameState {
+        if (state.gameStatus() != ScoundrelGameStatus.IN_PROGRESS)
+            throw IllegalStateException("The game has already ended: ${state.gameStatus()}")
+
         return advanceState(command.execute(state))
     }
 

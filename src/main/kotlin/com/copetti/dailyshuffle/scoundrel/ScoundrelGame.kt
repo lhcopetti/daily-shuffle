@@ -9,6 +9,7 @@ class ScoundrelGame private constructor(
     private val state: ScoundrelGameState,
     private val engine: ScoundrelGameEngine
 ) : ScoundrelGameView {
+    override fun gameStatus() = state.gameStatus()
 
     override fun dungeonSize() = state.dungeonSize()
 

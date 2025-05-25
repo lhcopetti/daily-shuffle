@@ -15,6 +15,25 @@ fun main() {
     var currentGame = game
     while(true) {
         printGame(currentGame)
+        val status = currentGame.gameStatus()
+        if (status != com.copetti.dailyshuffle.scoundrel.state.ScoundrelGameStatus.IN_PROGRESS) {
+            when (status) {
+                com.copetti.dailyshuffle.scoundrel.state.ScoundrelGameStatus.VICTORY -> {
+                    println("\n==============================")
+                    println("🎉 CONGRATULATIONS! 🎉")
+                    println("You have conquered the dungeon and emerged victorious!")
+                    println("==============================\n")
+                }
+                com.copetti.dailyshuffle.scoundrel.state.ScoundrelGameStatus.DEFEAT -> {
+                    println("\n==============================")
+                    println("💀 GAME OVER 💀")
+                    println("You have fallen in the dungeon. Better luck next time!")
+                    println("==============================\n")
+                }
+                else -> {}
+            }
+            break
+        }
         val commands = currentGame.getAvailableCommands()
         println("\nOptions:")
         println("0: Exit game")

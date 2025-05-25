@@ -1,9 +1,9 @@
 package com.copetti.dailyshuffle.scoundrel.state
 
-import com.copetti.dailyshuffle.scoundrel.ScoundrelException
-import com.copetti.dailyshuffle.scoundrel.ScoundrelGameView
 import com.copetti.dailyshuffle.scoundrel.CardDeck
 import com.copetti.dailyshuffle.scoundrel.ScoundrelDeckFilteringStrategy
+import com.copetti.dailyshuffle.scoundrel.ScoundrelException
+import com.copetti.dailyshuffle.scoundrel.ScoundrelGameView
 import kotlin.random.Random
 
 data class ScoundrelGameState(
@@ -31,6 +31,16 @@ data class ScoundrelGameState(
             return ScoundrelGameState(dungeon, room, random)
         }
 
+    }
+
+    override fun gameStatus(): ScoundrelGameStatus {
+        if (life <= 0) {
+            return ScoundrelGameStatus.DEFEAT
+        }
+        if (room.getCards().size == 1 && deck.cards.isEmpty())
+            return ScoundrelGameStatus.VICTORY
+
+        return ScoundrelGameStatus.IN_PROGRESS
     }
 
     override fun dungeonSize() = deck.cards.size
