@@ -30,10 +30,10 @@ class ScoundrelCardMapperTest {
     }
 
     @Test
-    fun `maps DIAMONDS to EQUIPMENT and correct value`() {
+    fun `maps DIAMONDS to WEAPON and correct value`() {
         val card = Card(CardRank.TEN, CardSuit.DIAMONDS)
         val scoundrelCard = ScoundrelCardMapper.toScoundrelCard(card)
-        assertEquals(ScoundrelType.EQUIPMENT, scoundrelCard.type)
+        assertEquals(ScoundrelType.WEAPON, scoundrelCard.type)
         assertEquals(10, scoundrelCard.value)
     }
 } 

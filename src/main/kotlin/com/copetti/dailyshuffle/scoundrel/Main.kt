@@ -63,6 +63,21 @@ private fun printGame(game: ScoundrelGame) {
     println("Scoundrel Game - Current State")
     println("Your current life is: ${game.life()}")
     println("Cards remaining in dungeon: ${game.dungeonSize()}")
+    
+    println(getWeaponInfo(game))
+
+    println()
     print("The room is: [${game.room().sectors.joinToString(separator = " - ") { it.card?.toShortFormat() ?: "empty" }}]")
     println()
+}
+
+private fun getWeaponInfo(game: ScoundrelGame): String {
+    val weaponInfo = StringBuilder("Weapon Bonus: ")
+    val weapon = game.equippedWeapon() ?: return weaponInfo.append("No weapon equipped").toString()
+
+    weaponInfo.append(" +${weapon.attack} attack")
+    if (weapon.durability() != null)
+        weaponInfo.append(" ${weapon.durability()} durability")
+
+    return weaponInfo.toString()
 }

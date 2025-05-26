@@ -17,6 +17,8 @@ class ScoundrelGame private constructor(
 
     override fun life() = state.life
 
+    override fun equippedWeapon() = state.equippedWeapon()
+
     fun getAvailableCommands(): List<ScoundrelCommand> {
         return engine.getAvailableMoves(state)
     }

@@ -7,7 +7,7 @@ import com.copetti.dailyshuffle.scoundrel.CardSuit
 enum class ScoundrelType {
     POTION,
     MONSTER,
-    EQUIPMENT
+    WEAPON
 }
 
 data class ScoundrelCard(
@@ -18,13 +18,14 @@ data class ScoundrelCard(
 class ScoundrelCardMapper {
 
     companion object {
+
         fun toScoundrelCard(card: Card): ScoundrelCard {
 
             val type = when (card.suit) {
                 CardSuit.CLUBS -> ScoundrelType.MONSTER
                 CardSuit.SPADES -> ScoundrelType.MONSTER
                 CardSuit.HEARTS -> ScoundrelType.POTION
-                CardSuit.DIAMONDS -> ScoundrelType.EQUIPMENT
+                CardSuit.DIAMONDS -> ScoundrelType.WEAPON
             }
             val value = when (card.rank) {
                 CardRank.ACE -> 14

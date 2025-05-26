@@ -12,7 +12,8 @@ data class ScoundrelGameState(
     val random: Random,
     val life: Int = STARTING_LIFE,
     val skippedLastRoom: Boolean = false,
-    val drankPotionInRoom: Boolean = false
+    val drankPotionInRoom: Boolean = false,
+    val equippedWeapon: EquippedWeapon? = null
 ) : ScoundrelGameView {
 
     companion object {
@@ -53,4 +54,5 @@ data class ScoundrelGameState(
         return life
     }
 
+    override fun equippedWeapon() = equippedWeapon
 }
