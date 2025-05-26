@@ -15,4 +15,9 @@ data class EquippedWeapon (
         val scoundrelCard = ScoundrelCardMapper.toScoundrelCard(monstersSlain.last())
         return scoundrelCard.value
     }
+
+    fun slay(card: Card) = copy(
+        monstersSlain = monstersSlain + listOf(card)
+    )
+
 }

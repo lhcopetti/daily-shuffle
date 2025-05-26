@@ -77,7 +77,7 @@ private fun getWeaponInfo(game: ScoundrelGame): String {
 
     weaponInfo.append(" +${weapon.attack} attack")
     if (weapon.durability() != null)
-        weaponInfo.append(" ${weapon.durability()} durability")
+        weaponInfo.append(" (${weapon.durability()} durability)")
 
     return weaponInfo.toString()
 }

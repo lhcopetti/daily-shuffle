@@ -4,10 +4,7 @@ import com.copetti.dailyshuffle.scoundrel.state.ScoundrelGameState
 import com.copetti.dailyshuffle.scoundrel.command.ScoundrelCommand
 import com.copetti.dailyshuffle.scoundrel.command.ScoundrelCommandFactory
 import com.copetti.dailyshuffle.scoundrel.command.commands.internal.ReloadRoomCommand
-import com.copetti.dailyshuffle.scoundrel.command.factories.FightMonsterCommandFactory
-import com.copetti.dailyshuffle.scoundrel.command.factories.DrinkPotionCommandFactory
-import com.copetti.dailyshuffle.scoundrel.command.factories.SkipRoomCommandFactory
-import com.copetti.dailyshuffle.scoundrel.command.factories.EquipWeaponCommandFactory
+import com.copetti.dailyshuffle.scoundrel.command.factories.*
 import com.copetti.dailyshuffle.scoundrel.state.ScoundrelGameStatus
 
 class ScoundrelGameEngine(
@@ -16,7 +13,8 @@ class ScoundrelGameEngine(
         SkipRoomCommandFactory(),
         DrinkPotionCommandFactory(),
         FightMonsterCommandFactory(),
-        EquipWeaponCommandFactory()
+        EquipWeaponCommandFactory(),
+        FightMonsterWithWeaponCommandFactory()
     )
 
     fun getAvailableMoves(state: ScoundrelGameState): List<ScoundrelCommand> {
