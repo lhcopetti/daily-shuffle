@@ -1,22 +1,23 @@
 package com.copetti.dailyshuffle.scoundrel.command.commands
 
-import com.copetti.dailyshuffle.scoundrel.state.ScoundrelGameState
+import com.copetti.dailyshuffle.scoundrel.command.ScoundrelTarget
 import com.copetti.dailyshuffle.scoundrel.command.ScoundrelTargetCommand
+import com.copetti.dailyshuffle.scoundrel.engine.ScoundrelWeapon
 import com.copetti.dailyshuffle.scoundrel.state.EquippedWeapon
+import com.copetti.dailyshuffle.scoundrel.state.ScoundrelGameState
 
 class EquipWeaponCommand(
-    private val attackBonus: Int,
-    target: Int
-) : ScoundrelTargetCommand(target) {
+    target: ScoundrelTarget<ScoundrelWeapon>
+) : ScoundrelTargetCommand<ScoundrelWeapon>(target) {
 
     override fun doExecute(state: ScoundrelGameState): ScoundrelGameState {
         return state.copy(
             equippedWeapon = EquippedWeapon(
-                attack = attackBonus,
+                attack = target.value.attackBonus,
                 monstersSlain = listOf()
             )
         )
     }
 
-    override fun displayName(): String = "Equip Weapon at #$target - (+$attackBonus attack)"
+    override fun displayName(): String = "Equip Weapon at #${target.index} - (+${target.value.attackBonus} attack)"
 } 

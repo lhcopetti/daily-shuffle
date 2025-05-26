@@ -1,21 +1,21 @@
 package com.copetti.dailyshuffle.scoundrel.command.commands
 
-import com.copetti.dailyshuffle.scoundrel.state.ScoundrelGameState
+import com.copetti.dailyshuffle.scoundrel.command.ScoundrelTarget
 import com.copetti.dailyshuffle.scoundrel.command.ScoundrelTargetCommand
-import kotlin.math.min
+import com.copetti.dailyshuffle.scoundrel.engine.ScoundrelPotion
+import com.copetti.dailyshuffle.scoundrel.state.ScoundrelGameState
 
 class DrinkPotionCommand(
     private val lifeBonus: Int,
-    target: Int
-) : ScoundrelTargetCommand(target) {
+    target: ScoundrelTarget<ScoundrelPotion>
+) : ScoundrelTargetCommand<ScoundrelPotion>(target) {
 
     override fun doExecute(state: ScoundrelGameState): ScoundrelGameState {
-        val newLife = min(state.life + lifeBonus, ScoundrelGameState.STARTING_LIFE)
         return state.copy(
-            life = newLife,
+            life = state.life + lifeBonus,
             drankPotionInRoom = true
         )
     }
 
-    override fun displayName(): String = "Drink Potion at #$target - (+$lifeBonus life)"
-} 
+    override fun displayName(): String = "Drink Potion at #${target.index} - (+$lifeBonus life)"
+}

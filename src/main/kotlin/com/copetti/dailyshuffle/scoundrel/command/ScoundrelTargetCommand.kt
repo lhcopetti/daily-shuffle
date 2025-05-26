@@ -1,9 +1,16 @@
 package com.copetti.dailyshuffle.scoundrel.command
 
+import com.copetti.dailyshuffle.scoundrel.engine.ScoundrelCard
 import com.copetti.dailyshuffle.scoundrel.state.ScoundrelGameState
 
-abstract class ScoundrelTargetCommand(
-    val target: Int
+
+data class ScoundrelTarget<T: ScoundrelCard>(
+    val index: Int,
+    val value: T
+)
+
+abstract class  ScoundrelTargetCommand<T: ScoundrelCard>(
+    val target: ScoundrelTarget<T>
 ) : ScoundrelCommand {
 
     abstract fun doExecute(state: ScoundrelGameState): ScoundrelGameState
@@ -14,7 +21,7 @@ abstract class ScoundrelTargetCommand(
     }
 
     private fun applyTargetCommand(state: ScoundrelGameState): ScoundrelGameState {
-        val newRoom = state.room.clear(target)
+        val newRoom = state.room.clear(target.index)
         return state.copy(room = newRoom)
     }
 

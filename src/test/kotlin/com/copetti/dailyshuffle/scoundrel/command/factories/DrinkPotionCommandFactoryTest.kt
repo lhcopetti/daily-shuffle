@@ -8,8 +8,7 @@ import com.copetti.dailyshuffle.scoundrel.state.ScoundrelGameState
 import com.copetti.dailyshuffle.scoundrel.command.commands.DiscardHealthPotionCommand
 import com.copetti.dailyshuffle.scoundrel.command.commands.DrinkPotionCommand
 import com.copetti.dailyshuffle.scoundrel.state.ScoundrelRoom
-import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import kotlin.random.Random
 
@@ -29,7 +28,7 @@ class DrinkPotionCommandFactoryTest {
             deck = CardDeck(emptyList()),
             room = room,
             random = Random(1),
-            life = 10
+            life = 6
         )
         val commands = factory.createCommands(state)
         assertEquals(2, commands.size)
@@ -77,5 +76,43 @@ class DrinkPotionCommandFactoryTest {
         assertEquals(2, discardCommands.size)
         assertTrue(discardCommands.any { it.displayName().contains("#0") })
         assertTrue(discardCommands.any { it.displayName().contains("#1") })
+    }
+
+    @Test
+    fun `caps life bonus at STARTING_LIFE when creating potion command`() {
+        val room = ScoundrelRoom.buildScoundrelRoom(
+            listOf(
+                Card(CardRank.ACE, CardSuit.HEARTS) // potion with value 14
+            )
+        )
+        val state = ScoundrelGameState(
+            deck = CardDeck(emptyList()),
+            room = room,
+            random = Random(1),
+            life = 15 // Current life is 15, potion would heal 14, but should cap at 20
+        )
+        val commands = factory.createCommands(state)
+        assertEquals(1, commands.size)
+        val potionCommand = commands[0] as DrinkPotionCommand
+        assertTrue(potionCommand.displayName().contains("5")) // Should show +5 life (to reach cap of 20) instead of +14
+    }
+
+    @Test
+    fun `creates potion command with no life bonus when at full life`() {
+        val room = ScoundrelRoom.buildScoundrelRoom(
+            listOf(
+                Card(CardRank.FIVE, CardSuit.HEARTS) // potion with value 5
+            )
+        )
+        val state = ScoundrelGameState(
+            deck = CardDeck(emptyList()),
+            room = room,
+            random = Random(1),
+            life = ScoundrelGameState.STARTING_LIFE // Already at max life
+        )
+        val commands = factory.createCommands(state)
+        assertEquals(1, commands.size)
+        val potionCommand = commands[0] as DrinkPotionCommand
+        assertTrue(potionCommand.displayName().contains("0")) // Should show +0 life since already at max
     }
 }

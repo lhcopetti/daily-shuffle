@@ -2,9 +2,10 @@ package com.copetti.dailyshuffle.scoundrel.command.factories
 
 import com.copetti.dailyshuffle.scoundrel.command.ScoundrelCommand
 import com.copetti.dailyshuffle.scoundrel.command.ScoundrelCommandFactory
+import com.copetti.dailyshuffle.scoundrel.command.ScoundrelTarget
 import com.copetti.dailyshuffle.scoundrel.command.commands.FightMonsterWithWeaponCommand
 import com.copetti.dailyshuffle.scoundrel.engine.ScoundrelCardMapper
-import com.copetti.dailyshuffle.scoundrel.engine.ScoundrelType
+import com.copetti.dailyshuffle.scoundrel.engine.ScoundrelMonster
 import com.copetti.dailyshuffle.scoundrel.state.ScoundrelGameState
 import kotlin.math.max
 
@@ -18,19 +19,19 @@ class FightMonsterWithWeaponCommandFactory : ScoundrelCommandFactory {
             val card = sector.card ?: continue
             val monsterCard = ScoundrelCardMapper.toScoundrelCard(card)
 
-            if (monsterCard.type != ScoundrelType.MONSTER) continue
+            if (monsterCard !is ScoundrelMonster) continue
 
             val durability = state.equippedWeapon.durability()
-            if (durability != null && durability <= monsterCard.value)
+            if (durability != null && durability <= monsterCard.attackPower)
                 continue;
 
-            commands.add(
-                FightMonsterWithWeaponCommand(
-                    target = sector.roomIndex,
-                    monster = card,
-                    damage = max(0, monsterCard.value - state.equippedWeapon.attack)
-                )
+            val target = ScoundrelTarget(index = sector.roomIndex, value = monsterCard)
+            val command = FightMonsterWithWeaponCommand(
+                target = target,
+                damage = max(0, monsterCard.attackPower - state.equippedWeapon.attack)
             )
+
+            commands.add(command)
         }
 
         return commands

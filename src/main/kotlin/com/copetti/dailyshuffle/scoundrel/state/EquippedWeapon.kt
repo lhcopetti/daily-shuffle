@@ -1,23 +1,16 @@
 package com.copetti.dailyshuffle.scoundrel.state
 
-import com.copetti.dailyshuffle.scoundrel.Card
-import com.copetti.dailyshuffle.scoundrel.engine.ScoundrelCardMapper
+import com.copetti.dailyshuffle.scoundrel.engine.ScoundrelMonster
 
-data class EquippedWeapon (
+data class EquippedWeapon(
     val attack: Int,
-    private val monstersSlain: List<Card>
+    private val monstersSlain: List<ScoundrelMonster>
 ) {
 
-    fun durability(): Int? {
-        if (monstersSlain.isEmpty())
-            return null
+    fun durability() = monstersSlain.lastOrNull()?.attackPower
 
-        val scoundrelCard = ScoundrelCardMapper.toScoundrelCard(monstersSlain.last())
-        return scoundrelCard.value
-    }
-
-    fun slay(card: Card) = copy(
-        monstersSlain = monstersSlain + listOf(card)
+    fun slay(monster: ScoundrelMonster) = copy(
+        monstersSlain = monstersSlain + listOf(monster)
     )
 
 }

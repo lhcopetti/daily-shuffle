@@ -4,16 +4,19 @@ import com.copetti.dailyshuffle.scoundrel.Card
 import com.copetti.dailyshuffle.scoundrel.CardRank
 import com.copetti.dailyshuffle.scoundrel.CardSuit
 
-enum class ScoundrelType {
-    POTION,
-    MONSTER,
-    WEAPON
-}
+sealed interface ScoundrelCard
 
-data class ScoundrelCard(
-    val type: ScoundrelType,
-    val value: Int
-)
+data class ScoundrelMonster(
+    val attackPower: Int
+): ScoundrelCard
+
+data class ScoundrelWeapon(
+    val attackBonus: Int
+): ScoundrelCard
+
+data class ScoundrelPotion(
+    val lifeBonus: Int
+): ScoundrelCard
 
 class ScoundrelCardMapper {
 
@@ -21,13 +24,16 @@ class ScoundrelCardMapper {
 
         fun toScoundrelCard(card: Card): ScoundrelCard {
 
-            val type = when (card.suit) {
-                CardSuit.CLUBS -> ScoundrelType.MONSTER
-                CardSuit.SPADES -> ScoundrelType.MONSTER
-                CardSuit.HEARTS -> ScoundrelType.POTION
-                CardSuit.DIAMONDS -> ScoundrelType.WEAPON
+            val value = convertRank(card.rank)
+            return when (card.suit) {
+                CardSuit.CLUBS, CardSuit.SPADES -> ScoundrelMonster(value)
+                CardSuit.HEARTS -> ScoundrelPotion(value)
+                CardSuit.DIAMONDS -> ScoundrelWeapon(value)
             }
-            val value = when (card.rank) {
+        }
+
+        private fun convertRank(rank: CardRank): Int {
+            return when (rank) {
                 CardRank.ACE -> 14
                 CardRank.TWO -> 2
                 CardRank.THREE -> 3
@@ -42,8 +48,6 @@ class ScoundrelCardMapper {
                 CardRank.QUEEN -> 12
                 CardRank.KING -> 13
             }
-
-            return ScoundrelCard(type, value)
         }
     }
 }
