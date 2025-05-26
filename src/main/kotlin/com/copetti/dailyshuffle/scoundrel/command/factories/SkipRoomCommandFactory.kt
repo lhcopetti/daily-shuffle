@@ -11,6 +11,9 @@ class SkipRoomCommandFactory: ScoundrelCommandFactory {
         if (state.skippedLastRoom)
             return listOf()
 
+        if (state.room.getCards().size != state.room.sectors.size)
+            return listOf()
+
         return listOf(SkipRoomCommand())
     }
 
