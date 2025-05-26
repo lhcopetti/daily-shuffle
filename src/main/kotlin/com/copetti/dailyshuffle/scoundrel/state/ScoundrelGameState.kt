@@ -19,7 +19,7 @@ data class ScoundrelGameState(
     companion object {
 
         private const val ROOM_SIZE: Int = 4
-        private const val STARTING_LIFE: Int = 20
+        const val STARTING_LIFE: Int = 20
 
         fun newGameState(deck: CardDeck, random: Random): ScoundrelGameState {
             val scoundrelDeck = deck.filtered(ScoundrelDeckFilteringStrategy())
