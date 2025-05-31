@@ -19,5 +19,5 @@ class EquipWeaponCommand(
         )
     }
 
-    override fun displayName(): String = "Equip Weapon at #${target.index} - (+${target.value.attackBonus} attack)"
+    override fun displayName(): String = "Equip ${target.value} at #${target.index} - (+${target.value.attackBonus} attack)"
 } 

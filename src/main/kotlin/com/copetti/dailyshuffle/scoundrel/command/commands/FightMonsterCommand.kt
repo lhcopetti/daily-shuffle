@@ -14,5 +14,5 @@ class FightMonsterCommand(
         )
     }
 
-    override fun displayName(): String = "Fight monster at #${target.index} - (-${target.value.attackPower} life)"
+    override fun displayName(): String = "Fight ${target.value} at #${target.index} - (-${target.value.attackPower} life)"
 } 

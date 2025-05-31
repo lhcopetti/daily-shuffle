@@ -36,4 +36,22 @@ class ScoundrelCardMapperTest {
         assertTrue(scoundrelCard is ScoundrelWeapon)
         assertEquals(10, (scoundrelCard as ScoundrelWeapon).attackBonus)
     }
+
+    @Test
+    fun `ScoundrelMonster toString shows attack power`() {
+        val monster = ScoundrelMonster(5)
+        assertEquals("Monster(5)", monster.toString())
+    }
+
+    @Test
+    fun `ScoundrelPotion toString shows life bonus`() {
+        val potion = ScoundrelPotion(10)
+        assertEquals("Potion(10)", potion.toString())
+    }
+
+    @Test
+    fun `ScoundrelWeapon toString shows attack bonus`() {
+        val weapon = ScoundrelWeapon(7)
+        assertEquals("Weapon(7)", weapon.toString())
+    }
 } 

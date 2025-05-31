@@ -17,5 +17,5 @@ class DrinkPotionCommand(
         )
     }
 
-    override fun displayName(): String = "Drink Potion at #${target.index} - (+$lifeBonus life)"
+    override fun displayName(): String = "Drink ${target.value} at #${target.index} - (+$lifeBonus life)"
 }

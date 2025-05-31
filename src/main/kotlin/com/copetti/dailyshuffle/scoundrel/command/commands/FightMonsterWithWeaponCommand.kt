@@ -16,5 +16,5 @@ class FightMonsterWithWeaponCommand(
         )
     }
 
-    override fun displayName(): String = "Fight monster with equipped weapon at #${target.index} - (-$damage life)"
+    override fun displayName(): String = "Fight ${target.value} with equipped weapon at #${target.index} - (-$damage life)"
 } 

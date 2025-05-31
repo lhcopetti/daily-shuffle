@@ -8,15 +8,21 @@ sealed interface ScoundrelCard
 
 data class ScoundrelMonster(
     val attackPower: Int
-): ScoundrelCard
+): ScoundrelCard {
+    override fun toString() = "Monster($attackPower)"
+}
 
 data class ScoundrelWeapon(
     val attackBonus: Int
-): ScoundrelCard
+): ScoundrelCard {
+    override fun toString() = "Weapon($attackBonus)"
+}
 
 data class ScoundrelPotion(
     val lifeBonus: Int
-): ScoundrelCard
+): ScoundrelCard {
+    override fun toString() = "Potion($lifeBonus)"
+}
 
 class ScoundrelCardMapper {
 
