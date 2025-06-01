@@ -35,7 +35,7 @@ enum class CardColor {
     RED
 }
 
-class Card(
+data class Card(
     val rank: CardRank,
     val suit: CardSuit
 ) {

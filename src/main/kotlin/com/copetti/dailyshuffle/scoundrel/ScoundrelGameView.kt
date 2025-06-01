@@ -8,6 +8,8 @@ interface ScoundrelGameView {
 
     fun gameStatus(): ScoundrelGameStatus
 
+    fun gameRound(): Int
+
     fun dungeonSize(): Int
 
     fun room(): ScoundrelRoom

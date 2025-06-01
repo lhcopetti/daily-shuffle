@@ -34,12 +34,12 @@ fun main() {
             }
             break
         }
-        val commands = currentGame.getAvailableCommands()
+        val commands = currentGame.getAvailableCommands().sortedWith(scoundrelCommandComparator())
         println("\nOptions:")
-        println("0: Exit game")
         commands.forEachIndexed { idx, cmd ->
             println("${idx + 1}: ${cmd.displayName()}")
         }
+        println("0: Exit game")
         print("Enter your choice: ")
         val input = readlnOrNull()?.trim()
         val choice = input?.toIntOrNull()
@@ -80,4 +80,12 @@ private fun getWeaponInfo(game: ScoundrelGame): String {
         weaponInfo.append(" (${weapon.durability()} durability)")
 
     return weaponInfo.toString()
+}
+
+private fun scoundrelCommandComparator(): Comparator<ScoundrelCommand> {
+
+    return Comparator.comparing { command -> when(command) {
+        is ScoundrelTargetCommand<*> -> command.target.index
+        else -> Integer.MAX_VALUE
+    } }
 }

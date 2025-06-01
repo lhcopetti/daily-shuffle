@@ -10,6 +10,7 @@ class ScoundrelGame private constructor(
     private val engine: ScoundrelGameEngine
 ) : ScoundrelGameView {
     override fun gameStatus() = state.gameStatus()
+    override fun gameRound() = state.gameRound()
 
     override fun dungeonSize() = state.dungeonSize()
 
@@ -29,8 +30,8 @@ class ScoundrelGame private constructor(
 
     companion object {
 
-        fun newGame(random: Random, deck: CardDeck): ScoundrelGame {
-            val state = ScoundrelGameState.newGameState(deck, random)
+        fun newGame(random: Random, deck: CardDeck, startingLife: Int? = null): ScoundrelGame {
+            val state = ScoundrelGameState.newGameState(deck, random, startingLife)
             return ScoundrelGame(
                 state = state,
                 engine = ScoundrelGameEngine()

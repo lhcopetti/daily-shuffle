@@ -27,8 +27,8 @@ class ScoundrelGameEngine(
     fun executeCommand(state: ScoundrelGameState, command: ScoundrelCommand): ScoundrelGameState {
         if (state.gameStatus() != ScoundrelGameStatus.IN_PROGRESS)
             throw IllegalStateException("The game has already ended: ${state.gameStatus()}")
-
-        return advanceState(command.execute(state))
+        val executed = command.execute(state)
+        return advanceState(executed.copy(roundCount = state.roundCount + 1))
     }
 
     private fun advanceState(state: ScoundrelGameState): ScoundrelGameState {
