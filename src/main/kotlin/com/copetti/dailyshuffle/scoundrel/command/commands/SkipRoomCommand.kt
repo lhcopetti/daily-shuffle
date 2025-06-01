@@ -6,11 +6,11 @@ import com.copetti.dailyshuffle.scoundrel.state.ScoundrelRoom
 
 class SkipRoomCommand : ScoundrelCommand {
     override fun execute(state: ScoundrelGameState): ScoundrelGameState {
-        val (deck, newRoom) = state.deck.drawAtMost(state.room.size())
+        val (deck, drawnCards) = state.deck.drawAtMost(state.room.size())
         val roomCards = state.room.getCards()
         return state.copy(
             deck = deck.bottomRandomly(roomCards, state.random),
-            room = ScoundrelRoom.buildScoundrelRoom(newRoom),
+            room = state.room.empty().load(drawnCards),
             skippedLastRoom = true
         )
     }

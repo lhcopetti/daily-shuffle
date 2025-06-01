@@ -9,16 +9,7 @@ class ReloadRoomCommand : ScoundrelCommand {
     override fun execute(state: ScoundrelGameState): ScoundrelGameState {
         val cardsToDraw = state.room.sectors.size - state.room.getCards().size
         val (newDeck, drawnCards) = state.deck.drawAtMost(cardsToDraw)
-
-        val roomCards = mutableListOf<Card?>()
-        roomCards.addAll(state.room.getCards())
-        roomCards.addAll(drawnCards)
-
-        while (state.room.sectors.size > roomCards.size) {
-            roomCards.add(null)
-        }
-
-        val newRoom = ScoundrelRoom.buildScoundrelRoom(roomCards)
+        val newRoom = state.room.load(drawnCards)
 
         return state.copy(
             deck = newDeck,
