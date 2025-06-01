@@ -26,7 +26,6 @@ class ReloadRoomCommandTest {
         val state = ScoundrelGameState(
             deck = CardDeck(deckCards),
             room = room,
-            random = Random(1),
             life = 20,
             drankPotionInRoom = true,
             skippedLastRoom = true
@@ -57,7 +56,6 @@ class ReloadRoomCommandTest {
         val state = ScoundrelGameState(
             deck = CardDeck(deckCards),
             room = room,
-            random = Random(1),
             life = 20,
             drankPotionInRoom = true,
             skippedLastRoom = true

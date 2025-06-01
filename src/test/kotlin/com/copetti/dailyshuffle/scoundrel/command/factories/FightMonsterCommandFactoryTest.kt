@@ -25,7 +25,6 @@ class FightMonsterCommandFactoryTest {
         val state = ScoundrelGameState(
             deck = CardDeck(emptyList()),
             room = room,
-            random = Random(1),
             life = 20
         )
         val commands = FightMonsterCommandFactory().createCommands(state)

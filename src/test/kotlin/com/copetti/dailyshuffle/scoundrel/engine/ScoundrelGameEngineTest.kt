@@ -29,7 +29,11 @@ class ScoundrelGameEngineTest {
 
         repeat(3) { expectedRound ->
             state = engine.executeCommand(state, command)
-            assertEquals(expectedRound + 1, state.roundCount, "Round count should be ${expectedRound + 1} after ${expectedRound + 1} commands")
+            assertEquals(
+                expectedRound + 1,
+                state.roundCount,
+                "Round count should be ${expectedRound + 1} after ${expectedRound + 1} commands"
+            )
         }
     }
 
@@ -40,14 +44,14 @@ class ScoundrelGameEngineTest {
         val command = createDummyCommand()
 
         val afterCommand = engine.executeCommand(initialState, command)
-        
+
         // The round count should only increment once, even though the room is reloaded
         assertEquals(1, afterCommand.roundCount, "Round count should only increment once even with room reload")
     }
 
     private fun createGameState(): ScoundrelGameState {
         val deck = CardDeck.newShuffledDeck(Random(42))
-        return ScoundrelGameState.newGameState(deck, Random(42))
+        return ScoundrelGameState.newGameState(deck)
     }
 
     private fun createGameStateWithTwoCardsToTriggerRoomReloading(): ScoundrelGameState {
@@ -59,7 +63,6 @@ class ScoundrelGameEngineTest {
         return ScoundrelGameState(
             deck = CardDeck(emptyList()),
             room = room,
-            random = Random(42)
         )
     }
 
@@ -67,6 +70,7 @@ class ScoundrelGameEngineTest {
         override fun execute(state: ScoundrelGameState): ScoundrelGameState {
             return state
         }
+
         override fun displayName() = "Dummy Command"
     }
 } 

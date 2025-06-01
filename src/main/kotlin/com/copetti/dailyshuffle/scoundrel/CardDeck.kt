@@ -2,7 +2,7 @@ package com.copetti.dailyshuffle.scoundrel
 
 import kotlin.random.Random
 
-class CardDeck(
+data class CardDeck(
     val cards: List<Card>
 ) {
 

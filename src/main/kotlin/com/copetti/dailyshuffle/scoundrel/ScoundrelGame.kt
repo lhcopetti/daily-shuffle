@@ -6,8 +6,9 @@ import com.copetti.dailyshuffle.scoundrel.engine.ScoundrelGameEngine
 import kotlin.random.Random
 
 class ScoundrelGame private constructor(
-    private val state: ScoundrelGameState,
-    private val engine: ScoundrelGameEngine
+    val state: ScoundrelGameState,
+    private val engine: ScoundrelGameEngine,
+    private val random: Random,
 ) : ScoundrelGameView {
     override fun gameStatus() = state.gameStatus()
     override fun gameRound() = state.gameRound()
@@ -25,16 +26,17 @@ class ScoundrelGame private constructor(
     }
 
     fun executeCommand(command: ScoundrelCommand): ScoundrelGame {
-        return ScoundrelGame(engine.executeCommand(state, command), engine)
+        return ScoundrelGame(engine.executeCommand(state, command), engine,  random)
     }
 
     companion object {
 
         fun newGame(random: Random, deck: CardDeck, startingLife: Int? = null): ScoundrelGame {
-            val state = ScoundrelGameState.newGameState(deck, random, startingLife)
+            val state = ScoundrelGameState.newGameState(deck, startingLife)
             return ScoundrelGame(
                 state = state,
-                engine = ScoundrelGameEngine()
+                engine = ScoundrelGameEngine(),
+                random = random
             )
         }
 

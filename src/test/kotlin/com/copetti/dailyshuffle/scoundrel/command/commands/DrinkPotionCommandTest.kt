@@ -20,7 +20,6 @@ class DrinkPotionCommandTest {
         val state = ScoundrelGameState(
             deck = CardDeck(emptyList()),
             room = ScoundrelRoom.buildScoundrelRoom(listOf(Card(CardRank.FIVE, CardSuit.HEARTS))),
-            random = Random(1),
             life = 10
         )
 

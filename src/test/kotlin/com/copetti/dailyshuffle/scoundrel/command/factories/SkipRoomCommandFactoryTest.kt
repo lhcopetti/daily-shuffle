@@ -27,7 +27,6 @@ class SkipRoomCommandFactoryTest {
         val state = ScoundrelGameState(
             deck = CardDeck(emptyList()),
             room = room,
-            random = Random(1),
             life = 20
         )
         val commands = factory.createCommands(state)
@@ -48,7 +47,6 @@ class SkipRoomCommandFactoryTest {
         val state = ScoundrelGameState(
             deck = CardDeck(emptyList()),
             room = room,
-            random = Random(1),
             life = 20
         )
         val commands = factory.createCommands(state)
@@ -68,7 +66,6 @@ class SkipRoomCommandFactoryTest {
         val state = ScoundrelGameState(
             deck = CardDeck(emptyList()),
             room = room,
-            random = Random(1),
             life = 20,
             skippedLastRoom = true
         )

@@ -9,7 +9,6 @@ import kotlin.random.Random
 data class ScoundrelGameState(
     val deck: CardDeck,
     val room: ScoundrelRoom,
-    val random: Random,
     val life: Int = STARTING_LIFE,
     val skippedLastRoom: Boolean = false,
     val drankPotionInRoom: Boolean = false,
@@ -22,7 +21,7 @@ data class ScoundrelGameState(
         private const val ROOM_SIZE: Int = 4
         const val STARTING_LIFE: Int = 20
 
-        fun newGameState(deck: CardDeck, random: Random, startingLife: Int? = null): ScoundrelGameState {
+        fun newGameState(deck: CardDeck, startingLife: Int? = null): ScoundrelGameState {
             val scoundrelDeck = deck.filtered(ScoundrelDeckFilteringStrategy())
 
             if (scoundrelDeck.cards.isEmpty())
@@ -33,7 +32,6 @@ data class ScoundrelGameState(
             return ScoundrelGameState(
                 deck = dungeon,
                 room = room,
-                random = random,
                 life = startingLife ?: STARTING_LIFE
             )
         }

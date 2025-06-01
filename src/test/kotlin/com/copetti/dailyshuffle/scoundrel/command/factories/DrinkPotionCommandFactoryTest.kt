@@ -27,7 +27,6 @@ class DrinkPotionCommandFactoryTest {
         val state = ScoundrelGameState(
             deck = CardDeck(emptyList()),
             room = room,
-            random = Random(1),
             life = 6
         )
         val commands = factory.createCommands(state)
@@ -49,7 +48,6 @@ class DrinkPotionCommandFactoryTest {
         val state = ScoundrelGameState(
             deck = CardDeck(emptyList()),
             room = room,
-            random = Random(1),
             life = 10
         )
         val commands = factory.createCommands(state)
@@ -67,7 +65,6 @@ class DrinkPotionCommandFactoryTest {
         val state = ScoundrelGameState(
             deck = CardDeck(emptyList()),
             room = room,
-            random = Random(1),
             life = 10,
             drankPotionInRoom = true
         )
@@ -88,7 +85,6 @@ class DrinkPotionCommandFactoryTest {
         val state = ScoundrelGameState(
             deck = CardDeck(emptyList()),
             room = room,
-            random = Random(1),
             life = 15 // Current life is 15, potion would heal 14, but should cap at 20
         )
         val commands = factory.createCommands(state)
@@ -107,7 +103,6 @@ class DrinkPotionCommandFactoryTest {
         val state = ScoundrelGameState(
             deck = CardDeck(emptyList()),
             room = room,
-            random = Random(1),
             life = ScoundrelGameState.STARTING_LIFE // Already at max life
         )
         val commands = factory.createCommands(state)
